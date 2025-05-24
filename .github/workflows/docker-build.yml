@@ -27,4 +27,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: your_dockerhub_username/labc3:latest
+          tags: myronarty/labc3:latest
