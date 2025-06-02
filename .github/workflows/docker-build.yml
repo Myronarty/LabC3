@@ -33,4 +33,4 @@ jobs:
         run: docker pull myronarty/labc3:latest
 
       - name: Run the Docker container
-        run: docker run --rm myronarty/labc3:latest
+        run: docker run --rm myronarty7/labc3:latest
