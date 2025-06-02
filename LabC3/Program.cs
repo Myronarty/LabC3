@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 
 namespace test3
@@ -9,7 +9,7 @@ namespace test3
         private readonly CancellationTokenSource cts = new CancellationTokenSource();
         private int counter = 0;
 
-        public event Action<int>? OnStep; //hi
+        public event Action<int>? OnStep;
 
         public void Start()
         {
@@ -41,41 +41,40 @@ namespace test3
         }
 
         public int Counter => counter;
+    }
 
+    class Program
+    {
         static void Main()
-{
-    var engine = new test3.ComputationController();
-    engine.OnStep += (x) => Console.WriteLine($"Time: {x}");
-    engine.Start();
-
-    if (Console.IsInputRedirected)
-    {
-        Console.WriteLine("Non-interactive mode detected. Running for 10 steps.");
-        Thread.Sleep(1000); // Let it run for a bit
-        engine.Stop();
-        return;
-    }
-
-    Console.WriteLine("Space for pause/resume. ESC for exit.");
-
-    while (true)
-    {
-        var key = Console.ReadKey(true);
-        if (key.Key == ConsoleKey.Spacebar)
         {
-            engine.TogglePause();
-            Console.WriteLine("Switched.");
-        }
-        else if (key.Key == ConsoleKey.Escape)
-        {
-            engine.Stop();
-            Console.WriteLine("Program stopped.");
-            break;
-        }
-    }
-}
+            var engine = new ComputationController();
+            engine.OnStep += (x) => Console.WriteLine($"Time: {x}");
+            engine.Start();
 
-                
+            if (Console.IsInputRedirected)
+            {
+                Console.WriteLine("Non-interactive mode detected. Running for 10 steps.");
+                Thread.Sleep(1000);
+                engine.Stop();
+                return;
+            }
+
+            Console.WriteLine("Space for pause/resume. ESC for exit.");
+
+            while (true)
+            {
+                var key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.Spacebar)
+                {
+                    engine.TogglePause();
+                    Console.WriteLine("Switched.");
+                }
+                else if (key.Key == ConsoleKey.Escape)
+                {
+                    engine.Stop();
+                    Console.WriteLine("Program stopped.");
+                    break;
+                }
             }
         }
     }
