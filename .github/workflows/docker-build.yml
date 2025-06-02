@@ -28,3 +28,9 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: myronarty/labc3:latest
+
+      - name: Pull the Docker image
+        run: docker pull myronarty/labc3:latest
+
+      - name: Run the Docker container
+        run: docker run --rm myronarty/labc3:latest
